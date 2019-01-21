@@ -16,7 +16,7 @@ describe Event do
 		end
 
         it 'saves @length as instance variable' do
-			length = 25
+			length = 25 *60
 			event = Event.new("17-11-22 10:10", 25, "Title", "mail@mail.com")
 			expect(event.length).to eq(length)
         end
@@ -29,7 +29,6 @@ describe Event do
             
         it 'saves @attendees as instance variable' do
 			attendees = ["sam@sam.fr", "sam@ir.com"]
-			attendees = attendees.inspect
 			event = Event.new("17-11-22 10:10", 22, "Title", "sam@sam.fr", "sam@ir.com")
 			expect(event.attendees).to eq(attendees)
         end

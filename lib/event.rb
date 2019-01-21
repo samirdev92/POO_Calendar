@@ -1,4 +1,5 @@
 require 'time'
+require 'pry'
 
 class Event
 
@@ -8,7 +9,7 @@ class Event
         @start_date = Time.parse(start_date)
         @length = length.to_i * 60
         @title = title
-        @attendees = attendees.inspect
+        @attendees = attendees
     end
 
     def postpone_24h(start_date)
@@ -20,9 +21,29 @@ class Event
     @end_date = start_date + length
     return @end_date
     end
-end
 
-event = Event.new("18-10-31 09:00", 30, "Projet", "samir@asfor.com, tintin@milou.com")
-puts event.start_date, event.length, event.title, event.attendees
-puts event.postpone_24h(event.start_date)
-puts event.end_date(event.start_date, event.length)
+    def is_past?()
+        if start_date < Time.now
+            return true
+        else return false
+        end
+    end
+
+    def is_future?()
+        !self.is_past?
+    end
+
+    def is_soon?()
+        if start_date < Time.now + 30*60
+            return true
+        else return false
+        end
+    end
+
+    def to_s
+        puts "Titre : #{@title}"
+        puts "Date de début : #{@start_date}"
+        puts "Durée : #{@length/60} min"
+        print "Invités : #{@attendees.join(" ")}"
+    end
+end
